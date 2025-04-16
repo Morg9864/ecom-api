@@ -1,103 +1,129 @@
-# ecom‑api
+# 🛒 ecom‑api
 
-A simple e‑commerce REST API built with Node.js, Express, MongoDB and Cloudinary, featuring JWT authentication, image upload, basic cart & order management, and webhook support.
+A simple e‑commerce REST API built with **Node.js**, **Express**, **MongoDB**, and **Cloudinary**.  
+It provides JWT‑based authentication, role‑based authorization, image uploads, basic cart & order
+management, and a payment‑webhook stub.
 
 ---
 
 ## 🛠️ Prerequisites
 
-- Node.js ≥ 18  
-- pnpm ≥ 8  
-- A MongoDB connection string (e.g. MongoDB Atlas)  
-- A Cloudinary account for image uploads  
+- **Node.js ≥ 18**
+- **pnpm ≥ 8**
+- A **MongoDB** connection string (e.g. MongoDB Atlas)
+- A **Cloudinary** account for image uploads
 
 ---
 
 ## 🚀 Installation
 
-1. **Clone the repo**  
+1. **Clone the repo**
+
    ```bash
    git clone https://github.com/Morg9864/ecom-api.git
    cd ecom-api
    ```
 
-2. **Install dependencies with pnpm**  
+2. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
-3. **Create a `.env` file** at the project root with:
+3. **Create a `.env` file** at the project root:
+
    ```env
    PORT=5000
-   MONGO_URI=your_mongo_connection_string
+   MONGODB_URI=your_mongo_connection_string
    JWT_SECRET=your_jwt_secret
    CLOUDINARY_CLOUD_NAME=xxx
    CLOUDINARY_API_KEY=xxx
    CLOUDINARY_API_SECRET=xxx
    ```
 
-4. **Start the server**  
+4. **Start the server**
+
    ```bash
    pnpm start
    ```
-   The API will run on `http://localhost:5000`.
+
+   The API will be running on <http://localhost:5000>.
 
 ---
 
 ## 📦 Available Scripts
 
-| Command      | Description                            |
-| ------------ | -------------------------------------- |
-| `pnpm start` | Run the production server              |
-| `pnpm test`  | Run Jest & Supertest integration tests |
+| Command        | Description                         |
+| -------------- | ----------------------------------- |
+| `pnpm start`   | Run the server in production mode   |
+| `pnpm dev`     | Run the server with hot‑reloading   |
+| `pnpm test`    | Run Jest + Supertest integration tests |
 
 ---
 
 ## 🔍 API Endpoints
 
-### Auth  
-- `POST /api/auth/register` — Register new user  
-- `POST /api/auth/login` — Login, returns JWT  
+### Auth
 
-### Products  
-- `GET  /api/products` — List all products  
-- `POST /api/products` — **Admin only**: Create product (with image upload)  
+| Method | Path                | Description              |
+| ------ | ------------------- | ------------------------ |
+| POST   | `/api/auth/register`| Register a new user      |
+| POST   | `/api/auth/login`   | Log in and receive a JWT |
 
-### Categories  
-- `GET  /api/categories` — List all categories  
-- `POST /api/categories` — **Admin only**: Create category  
+### Products
 
-### Cart  
-- `GET  /api/cart` — Get current user’s cart  
-- `POST /api/cart` — Add item to cart  
+| Method | Path            | Description                                      |
+| ------ | --------------- | ------------------------------------------------ |
+| GET    | `/api/products` | List all products                                |
+| POST   | `/api/products` | **Admin only** – create a product with image     |
 
-### Orders  
-- `POST /api/orders` — Create a new order  
-- `GET  /api/orders` — List your own orders  
-- `GET  /api/admin/orders` — **Admin only**: List all orders  
+### Categories
 
-### Webhook  
-- `POST /api/webhook/payment` — Fictitious payment webhook endpoint  
+| Method | Path               | Description                       |
+| ------ | ------------------ | --------------------------------- |
+| GET    | `/api/categories`  | List all categories               |
+| POST   | `/api/categories`  | **Admin only** – create category  |
+
+### Cart
+
+| Method | Path         | Description              |
+| ------ | ------------ | ------------------------ |
+| GET    | `/api/cart`  | Retrieve current cart    |
+| POST   | `/api/cart`  | Add an item to the cart  |
+
+### Orders
+
+| Method | Path                 | Description                              |
+| ------ | -------------------- | ---------------------------------------- |
+| POST   | `/api/orders`        | Create a new order                       |
+| GET    | `/api/orders`        | List your own orders                     |
+| GET    | `/api/admin/orders`  | **Admin only** – list all orders         |
+
+### Webhook
+
+| Method | Path                     | Description                        |
+| ------ | ------------------------ | ---------------------------------- |
+| POST   | `/api/webhook/payment`   | Stub for payment‑provider webhook  |
 
 ---
 
 ## 🗂️ Project Structure
 
-\`\`\`
+```text
 ecom-api/
-├── config/           # DB + Cloudinary setup
+├── config/           # Database & Cloudinary setup
 ├── controllers/      # Route handlers
-├── middleware/       # JWT auth + role checks
+├── middleware/       # JWT auth & role checks
 ├── models/           # Mongoose schemas
 ├── routes/           # Express routers
-├── tests/            # Jest & Supertest
+├── tests/            # Jest & Supertest suites
 ├── uploads/          # Multer temp uploads
-├── .env              # Environment variables
+├── .env              # Environment variables (not committed)
 ├── .gitignore
 ├── pnpm-lock.yaml
 ├── package.json
 └── index.js          # App entrypoint
-\`\`\`
+```
 
 ---
 
@@ -106,11 +132,11 @@ ecom-api/
 1. Fork the repository  
 2. Create a feature branch (`git checkout -b feature/xyz`)  
 3. Commit your changes (`git commit -m "feat: ..."`)  
-4. Push to the branch (`git push origin feature/xyz`)  
-5. Open a Pull Request  
+4. Push to your branch (`git push origin feature/xyz`)  
+5. Open a Pull Request
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+Licensed under the **MIT License**. See `LICENSE` for details.
