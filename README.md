@@ -17,7 +17,7 @@ A simple e‑commerce REST API built with Node.js, Express, MongoDB and Cloudina
 
 1. **Clone the repo**  
    ```bash
-   git clone https://github.com/your-username/ecom-api.git
+   git clone https://github.com/Morg9864/ecom-api.git
    cd ecom-api
    ```
 
