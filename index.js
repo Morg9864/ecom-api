@@ -22,6 +22,13 @@ app.use(express.json()); // Parse JSON bodies
 // Health check endpoint
 app.get("/healthz", (_req, res) => res.status(200).json({ status: "ok" }));
 
+// Home route
+app.get("/", (_req, res) => {
+	res.status(200).json({
+		message: "Welcome to the E-commerce API",
+	});
+});
+
 // Mount API routes
 app.use("/api/auth", authRouter);
 app.use("/api/products", productRouter);
