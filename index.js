@@ -1,3 +1,4 @@
+// index.js
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
@@ -10,9 +11,6 @@ import categoryRouter from "./routes/categories.js";
 import cartRouter from "./routes/cart.js";
 import adminRouter from "./routes/admin.js";
 import webhookRouter from "./routes/webhook.js";
-
-// Connect to database
-connectDB();
 
 const app = express();
 
@@ -33,19 +31,31 @@ app.use("/api/admin", adminRouter);
 app.use("/api/webhook", webhookRouter);
 
 // 404 handler
-app.use((req, res, next) => {
+app.use((req, res) => {
 	res.status(404).json({ message: "Not Found" });
 });
 
 // Global error handler
 app.use((err, req, res, next) => {
 	console.error(err.stack);
-	const status = err.statusCode || 500;
-	res.status(status).json({ message: err.message || "Server Error" });
+	res.status(err.statusCode || 500).json({
+		message: err.message || "Server Error",
+	});
 });
 
-// Start server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Connect to database and start server only outside of test environment
+if (process.env.NODE_ENV !== "test") {
+	connectDB()
+		.then(() => {
+			const PORT = process.env.PORT || 5000;
+			app.listen(PORT, () =>
+				console.log(`Server running on port ${PORT}`)
+			);
+		})
+		.catch(err => {
+			console.error("Failed to connect to DB", err);
+			process.exit(1);
+		});
+}
 
 export default app;
